@@ -1,4 +1,4 @@
-# Predictive Maintenance — EDA & Classification
+# Predictive Maintenance - EDA & Classification
 ## AI4I 2020 Manufacturing Dataset
 
 ## Overview
@@ -7,9 +7,9 @@ Dataset from UCI Machine Learning Repository, covering the full
 data science pipeline from exploratory analysis to model deployment.
 
 ## Notebooks
-1. **EDA** — Exploratory Data Analysis, statistical testing, and 
+1. **EDA** - Exploratory Data Analysis, statistical testing, and 
    visualisation of failure patterns
-2. **Classification** — Logistic Regression, Random Forest and XGBoost 
+2. **Classification** - Logistic Regression, Random Forest and XGBoost 
    models to predict machine failure, with threshold tuning, 
    cross-validation and feature engineering
 
