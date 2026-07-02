@@ -10,25 +10,28 @@ data science pipeline from exploratory analysis to model deployment.
 1. **EDA** — Exploratory Data Analysis, statistical testing, and 
    visualisation of failure patterns
 2. **Classification** — Logistic Regression, Random Forest and XGBoost 
-   models to predict machine failure, with threshold tuning and 
-   cross-validation
+   models to predict machine failure, with threshold tuning, 
+   cross-validation and feature engineering
 
 ## Key Findings
-- Dataset contains 10,000 records with 3.39% failure rate
+- Dataset contains 10,000 records with 3.39% failure rate (highly imbalanced)
 - Heat Dissipation Failure (HDF) is the most common failure type
 - Torque and Rotational Speed are the strongest predictors of failure,
   confirmed independently by both Random Forest and XGBoost
-- Random Forest (threshold=0.3) achieves the best overall performance: 
-  Recall=0.750, Precision=0.823, F1=0.785
-- Threshold tuning is model-specific — optimal threshold differs 
-  significantly between models (0.3 for RF vs 0.859 for XGBoost)
+- Feature engineering (Power = Torque × RPM, Temperature difference, 
+  High Wear flag) improved CV F1 by 19% — a larger gain than 
+  switching algorithms
+- Final model: Random Forest + Feature Engineering at threshold=0.3 
+  achieves Recall=0.809, Precision=0.859, F1=0.833
 
-## Models Compared
-| Model | F1 (CV) | Recall (tuned) | Precision (tuned) |
-|-------|---------|----------------|-------------------|
-| Logistic Regression | 0.235 | 0.824 | 0.139 |
-| Random Forest | 0.652 | 0.750 | 0.823 |
-| XGBoost | 0.623 | 0.750 | 0.761 |
+## Model Comparison
+| Model | Threshold | Recall | Precision | F1 (CV) |
+|-------|-----------|--------|-----------|---------|
+| Logistic Regression | 0.5 | 0.824 | 0.139 | 0.235 |
+| Random Forest | 0.5 | 0.570 | 0.886 | 0.652 |
+| XGBoost | 0.859 (tuned) | 0.750 | 0.761 | 0.623 |
+| Random Forest (tuned) | 0.3 | 0.750 | 0.823 | 0.652 |
+| **RF + Feature Engineering** | **0.3** | **0.809** | **0.859** | **0.778** |
 
 ## Tools Used
 - Python, Pandas, NumPy, Scikit-learn, XGBoost
@@ -39,6 +42,5 @@ data science pipeline from exploratory analysis to model deployment.
 
 ## Next Steps
 - Apply SMOTE for class imbalance
-- Feature engineering (Torque × Rotational Speed interaction)
 - Hyperparameter tuning (GridSearchCV)
 - Deploy model as REST API (FastAPI)
